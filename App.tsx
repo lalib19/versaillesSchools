@@ -6,14 +6,22 @@ import SignIn from './Screens/SignIn';
 import SignUp from './Screens/SignUp';
 import Schools from './Screens/Schools';
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<RouteParams>();
+
+export type RouteParams = {
+  Home: undefined;
+  SignUp: undefined;
+  SignIn: undefined;
+  Schools: undefined;
+};
 
 const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={() => ({
-        headerShown: false
-      })}>
+      <Stack.Navigator
+        screenOptions={() => ({
+          headerShown: false,
+        })}>
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="SignIn" component={SignIn} />
         <Stack.Screen name="SignUp" component={SignUp} />
