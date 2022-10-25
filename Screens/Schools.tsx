@@ -5,7 +5,7 @@ import Card from '../Components/Card';
 
 const Schools = () => {
   const {data, isLoaded} = useApiData(
-    'https://data.education.gouv.fr/api/v2/catalog/datasets/fr-en-annuaire-education/records?where=code_postal%3D%2278000%22&limit=10&offset=0',
+    'https://data.education.gouv.fr/api/v2/catalog/datasets/fr-en-annuaire-education/records?where=code_postal%3D%2278000%22&limit=100&offset=0',
   );
 
   if (!isLoaded) {
