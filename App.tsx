@@ -5,7 +5,7 @@ import Home from './Screens/Home';
 import SignIn from './Screens/SignIn';
 import SignUp from './Screens/SignUp';
 import Schools from './Screens/Schools';
-
+import Map from './Screens/Map';
 
 const Stack = createNativeStackNavigator<RouteParams>();
 
@@ -14,6 +14,7 @@ export type RouteParams = {
   SignUp: undefined;
   SignIn: undefined;
   Schools: undefined;
+  Map: undefined;
 };
 
 const App = () => {
@@ -27,6 +28,7 @@ const App = () => {
         <Stack.Screen name="SignIn" component={SignIn} />
         <Stack.Screen name="SignUp" component={SignUp} />
         <Stack.Screen name="Schools" component={Schools} />
+        <Stack.Screen name="Map" component={Map} />
       </Stack.Navigator>
     </NavigationContainer>
   );

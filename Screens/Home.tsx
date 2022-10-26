@@ -27,6 +27,13 @@ export default function Home() {
             }}>
             <Text style={{color: 'white', fontSize: 20}}>Register Here</Text>
           </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => {
+              navigation.navigate('Map');
+            }}>
+            <Text style={{color: 'white', fontSize: 20}}>Map</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </View>
