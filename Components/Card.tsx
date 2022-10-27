@@ -7,11 +7,12 @@ export type cardprops = {
     statut: string;
     adresse1: string;
     adresse3: string;
+    key: string;
 }
 
-const Card = ({nom_etabli, type_etabli, statut, adresse1, adresse3}:cardprops) => {
+const Card = ({nom_etabli, type_etabli, statut, adresse1, adresse3,key}:cardprops) => {
     return (
-        <View style={styles.container}>
+        <View style={styles.container} key={key}>
             <View style={styles.top}>
                 <View style={styles.school}>
                     <Text style={{flexWrap: 'wrap'}}>{nom_etabli}</Text>
