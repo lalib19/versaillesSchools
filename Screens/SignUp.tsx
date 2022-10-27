@@ -14,10 +14,11 @@ import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RouteParams} from '../App';
 import {yupResolver} from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import CustomButton from '../Components/CustomButton';
 
 type FormData = {
-  firstName:string;
-  lastName:string;
+  firstName: string;
+  lastName: string;
   email: string;
   password: string;
 };
@@ -50,7 +51,7 @@ export default function SignIn() {
 
   const onSubmit = (data: any) => {
     console.log(data);
-    navigation.navigate('Schools');
+    navigation.navigate('Home');
   };
 
   return (
@@ -135,9 +136,14 @@ export default function SignIn() {
       {errors.password?.message && (
         <Text style={styles.error}>{errors.password.message}</Text>
       )}
-      <TouchableOpacity style={styles.button} onPress={handleSubmit(onSubmit)}>
+      {/* <TouchableOpacity style={styles.button} onPress={handleSubmit(onSubmit)}>
         <Text style={{color: 'white', fontSize: 20}}>Submit</Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
+      <CustomButton
+        type={'submit'}
+        title={'Submit'}
+        onPress={handleSubmit(onSubmit)}
+      />
     </View>
   );
 }
@@ -156,18 +162,18 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 5,
     marginTop: 10,
-    marginBottom: 30
+    marginBottom: 30,
   },
   error: {
     color: 'red',
   },
-  button: {
-    marginVertical: 10,
-    width: '80%',
-    height: 50,
-    backgroundColor: 'dodgerblue',
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 10,
-  },
+  // button: {
+  //   marginVertical: 10,
+  //   width: '80%',
+  //   height: 50,
+  //   backgroundColor: 'dodgerblue',
+  //   alignItems: 'center',
+  //   justifyContent: 'center',
+  //   borderRadius: 10,
+  // },
 });

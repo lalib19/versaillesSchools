@@ -32,7 +32,11 @@ export default function MapComponent() {
   };
 
   if (!isLoaded) {
-    return <ActivityIndicator />;
+    return (
+      <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+        <ActivityIndicator size="large" />
+      </View>
+    );
   }
 
   return (
@@ -72,16 +76,17 @@ export default function MapComponent() {
           <Text style={styles.title}>
             {currentSchool.record.fields.nom_etablissement}
           </Text>
+          <View style={styles.separer}></View>
           <View style={styles.body}>
             <Text>
-              {currentSchool.record.fields.type_etablissement + " "}
+              {currentSchool.record.fields.type_etablissement + ' '}
               {currentSchool.record.fields.statut_public_prive}
             </Text>
             <Text>Adresse: {currentSchool.record.fields.adresse_1}</Text>
             <Text>Téléphone: {currentSchool.record.fields.telephone}</Text>
             {currentSchool.record.fields.web && (
               <Text>
-                Site web: {" "}
+                Site web:{' '}
                 <Text
                   style={{color: 'blue', textDecorationLine: 'underline'}}
                   onPress={() =>
@@ -129,5 +134,10 @@ const styles = StyleSheet.create({
   body: {
     width: '90%',
     textAlign: 'left',
+  },
+  separer: {
+    borderWidth: 0.2,
+    width: '70%',
+    height: 0.1,
   },
 });

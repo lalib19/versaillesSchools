@@ -1,39 +1,37 @@
-import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import React from 'react';
+import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RouteParams} from '../App';
+import CustomButton from '../Components/CustomButton';
 
 export default function Home() {
   const navigation = useNavigation<NativeStackNavigationProp<RouteParams>>();
 
   return (
     <View style={styles.container}>
-      <View style={styles.subcontainer}>
-        <Text style={styles.title}>Welcome !</Text>
-        <View style={styles.body}>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => {
-              navigation.navigate('SignIn');
-            }}>
-            <Text style={{color: 'white', fontSize: 20}}>Sign In</Text>
-          </TouchableOpacity>
-          <Text style={{fontSize: 20}}>Or</Text>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => {
-              navigation.navigate('SignUp');
-            }}>
-            <Text style={{color: 'white', fontSize: 20}}>Register Here</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => {
-              navigation.navigate('Map');
-            }}>
-            <Text style={{color: 'white', fontSize: 20}}>Map</Text>
-          </TouchableOpacity>
+      <View style={styles.titleContainer}>
+        {/* <Text style={styles.title}>Home</Text> */}
+        <Text style={styles.title}>
+          Ici vous pourrez consulter la liste des écoles de Versailles
+        </Text>
+      </View>
+      <View style={styles.navigatorContainer}>
+        <View style={styles.navigator}>
+          <Text style={styles.body}>Accéder à la liste des écoles </Text>
+          <CustomButton
+            title={'Liste'}
+            type={'default'}
+            onPress={() => navigation.navigate('Schools')}
+          />
+        </View>
+        <View style={styles.navigator}>
+          <Text style={styles.body}>Accéder à la carte des écoles </Text>
+          <CustomButton
+            title={'Carte'}
+            type={'default'}
+            onPress={() => navigation.navigate('Map')}
+          />
         </View>
       </View>
     </View>
@@ -44,22 +42,35 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent:"center"
+    justifyContent: 'center',
+    flexDirection: 'column',
   },
-  subcontainer: {
-    alignItems: 'center',
-    justifyContent: 'space-around',
-    height: '70%',
-    width: '100%',
-  },
-  body: {
+  titleContainer: {
     alignItems: 'center',
     justifyContent: 'center',
+    height: '30%',
+    width: '90%',
   },
-  title: {
-    fontSize: 50,
-    color: "teal",
-    fontWeight: "bold"
+  title: {fontSize: 30, textAlign: 'center', color: 'teal'},
+  body: {fontSize: 20, textAlign: 'center', color: 'teal'},
+  navigatorContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    // flexDirection: 'row',
+    height: '60%',
+    width: '100%',
+  },
+  navigator: {
+    alignItems: 'center',
+    justifyContent: 'space-evenly',
+    height: '50%',
+    width: '90%',
+    borderWidth: 5,
+    borderColor: 'teal',
+    borderRadius: 10,
+    margin: '2%',
+    backgroundColor: 'lavenderblush',
+    elevation: 5
   },
   button: {
     alignItems: 'center',
@@ -67,8 +78,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     backgroundColor: 'salmon',
     padding: 15,
-    margin: 15,
-    height: 80,
-    width: 160
+    height: 70,
+    width: 140,
   },
 });
