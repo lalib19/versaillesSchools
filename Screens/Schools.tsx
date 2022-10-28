@@ -90,7 +90,7 @@ const Schools = () => {
       </View>
       <FlatList
         data={schoollist1}
-        keyExtractor={item => item.id}
+        keyExtractor={(item, index) => item.record.fields.identifiant_de_l_etablissement}
         renderItem={({ item }) => (
           <Card
             nom_etabli={item.record.fields.nom_etablissement}
@@ -98,7 +98,7 @@ const Schools = () => {
             statut={item.record.fields.statut_public_prive}
             adresse1={item.record.fields.adresse_1}
             adresse3={item.record.fields.adresse_3}
-            key={item.id}
+            id={item.id}
           />
         )}
       />
