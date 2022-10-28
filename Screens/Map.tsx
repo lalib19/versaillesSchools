@@ -1,18 +1,20 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import React from 'react';
-import MapView from 'react-native-maps';
 import MapComponent from '../Components/MapComponent';
+import { RouteParams } from '../App';
 
 export default function Map() {
   return (
     <View style={styles.container}>
-      <MapComponent/>
+      <MapComponent />
     </View>
   );
-}
+};
+
+
 
 const styles = StyleSheet.create({
-    container: {
-        ...StyleSheet.absoluteFillObject,
-      },
+  container: {
+    ...StyleSheet.absoluteFillObject,
+  },
 });

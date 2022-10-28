@@ -6,9 +6,10 @@ import {
   ActivityIndicator,
   Linking,
 } from 'react-native';
-import React, {useRef, useState} from 'react';
+import React, {useState} from 'react';
 import MapView, {Marker, Callout, Region} from 'react-native-maps';
 import useApiData from '../api/useApiData';
+import {RouteParams} from '../App';
 
 export default function MapComponent() {
   const {data, isLoaded} = useApiData(
@@ -39,6 +40,7 @@ export default function MapComponent() {
     );
   }
 
+  // console.log(prop)
   return (
     <View style={styles.container}>
       <MapView

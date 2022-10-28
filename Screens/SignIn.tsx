@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
   Text,
   View,
   TextInput,
   StyleSheet,
-  TouchableOpacity,
 } from 'react-native';
 import {useForm, Controller} from 'react-hook-form';
 import {useNavigation} from '@react-navigation/native';
@@ -13,6 +12,7 @@ import {RouteParams} from '../App';
 import {yupResolver} from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import CustomButton from '../Components/CustomButton';
+import { AuthContext } from '../App';
 
 type FormData = {
   email: string;
@@ -26,8 +26,10 @@ const schema = yup
   })
   .required();
 
-export default function SignIn() {
-  const navigation = useNavigation<NativeStackNavigationProp<RouteParams>>();
+  export default function SignIn() {
+    // const {user, login} = useContext(UserContext)
+    const [authState,setAuthState] = useContext<any>(AuthContext);
+    const navigation = useNavigation<NativeStackNavigationProp<RouteParams>>();
 
   const {
     control,
@@ -42,8 +44,13 @@ export default function SignIn() {
   });
 
   const onSubmit = (data: any) => {
+    setAuthState({id: data.email, signedIn: true})
     navigation.navigate('Home');
-    console.log(data);
+    console.log(authState)
+
+    // console.log("before " + user)
+    // login(data.email)
+    // console.log("after " + user)
   };
 
   return (
@@ -89,9 +96,6 @@ export default function SignIn() {
       {errors.password?.message && (
         <Text style={styles.error}>{errors.password.message}</Text>
       )}
-      {/* <TouchableOpacity style={styles.button} onPress={handleSubmit(onSubmit)}>
-        <Text style={{color: 'white', fontSize: 20}}>Submit</Text>
-      </TouchableOpacity> */}
       <CustomButton
         type={'submit'}
         title={'Submit'}
@@ -120,13 +124,4 @@ const styles = StyleSheet.create({
   error: {
     color: 'red',
   },
-  // button: {
-  //   marginVertical: 10,
-  //   width: '80%',
-  //   height: 50,
-  //   backgroundColor: 'dodgerblue',
-  //   alignItems: 'center',
-  //   justifyContent: 'center',
-  //   borderRadius: 10,
-  // },
 });

@@ -1,21 +1,22 @@
 import {View, Text} from 'react-native';
 import React, {createContext, useState} from 'react';
+import SignIn from '../Screens/SignIn';
 
-interface userProps {
-    name: string,
-    auth: boolean
+export interface userProps {
+  name: string;
+  auth: boolean;
 }
 
-interface valueProps {
-    user: userProps,
-    login: (name: string) => void,
-    logout: () => void
+export interface valueProps {
+  user: userProps;
+  login: (name: string) => void;
+  logout: () => void;
 }
 
+export const UserContext = createContext({name: 'a', auth: false});
 export default function UserProvider() {
-  const [user, setUser] = useState<userProps>({name: '', auth: true});
+  const [user, setUser] = useState<userProps>({name: 'b', auth: true});
 
-  const UserContext = createContext({name: '', auth: false});
 
   const login = (name: string) => {
     setUser(user => ({
@@ -33,7 +34,7 @@ export default function UserProvider() {
 
   return (
     <UserContext.Provider value={{user, login, logout}}>
-      {children}
+      <SignIn/>
     </UserContext.Provider>
   );
 }

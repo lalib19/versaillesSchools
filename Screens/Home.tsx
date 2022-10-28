@@ -1,17 +1,20 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {RouteParams} from '../App';
+import {AuthContext, RouteParams} from '../App';
 import CustomButton from '../Components/CustomButton';
+import LogOutComponent from '../Components/LogOutComponent';
 
 export default function Home() {
+  const [authState, setAuthState] = useContext<any>(AuthContext);
+
   const navigation = useNavigation<NativeStackNavigationProp<RouteParams>>();
 
   return (
     <View style={styles.container}>
+      {authState && <LogOutComponent/>}
       <View style={styles.titleContainer}>
-        {/* <Text style={styles.title}>Home</Text> */}
         <Text style={styles.title}>
           Ici vous pourrez consulter la liste des écoles de Versailles
         </Text>
@@ -22,11 +25,14 @@ export default function Home() {
           <CustomButton
             title={'Liste'}
             type={'default'}
-            onPress={() => navigation.navigate('Schools')}
+            onPress={() => {
+              console.log(authState);
+              navigation.navigate('Schools');
+            }}
           />
         </View>
         <View style={styles.navigator}>
-          <Text style={styles.body}>Accéder à la carte des écoles </Text>
+          <Text style={styles.body}>Accéder à la carte </Text>
           <CustomButton
             title={'Carte'}
             type={'default'}
@@ -70,7 +76,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     margin: '2%',
     backgroundColor: 'lavenderblush',
-    elevation: 5
+    elevation: 5,
   },
   button: {
     alignItems: 'center',

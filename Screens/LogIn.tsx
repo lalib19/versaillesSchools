@@ -1,11 +1,13 @@
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
-import React from 'react';
+import React, {useContext} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {RouteParams} from '../App';
+import {AuthContext, RouteParams} from '../App';
 import CustomButton from '../Components/CustomButton';
 
 export default function LogIn() {
+  const [authState, setAuthState] = useContext<any>(AuthContext);
+
   const navigation = useNavigation<NativeStackNavigationProp<RouteParams>>();
 
   return (
@@ -16,20 +18,23 @@ export default function LogIn() {
           <CustomButton
             title={'Sign In'}
             size={8}
-            onPress={() => navigation.navigate("SignIn")}
+            onPress={() => {
+              navigation.navigate('SignIn');
+              console.log(authState);
+            }}
           />
           <Text style={{fontSize: 30, margin: 10}}>Or</Text>
           <CustomButton
             title={'Sign Up'}
             size={8}
-            onPress={() => navigation.navigate("SignUp")}
+            onPress={() => navigation.navigate('SignUp')}
           />
         </View>
-          <CustomButton
-            title={'Map'}
-            size={8}
-            onPress={() => navigation.navigate("Map")}
-          />
+        <CustomButton
+          title={'Map'}
+          size={8}
+          onPress={() => navigation.navigate('Map')}
+        />
       </View>
     </View>
   );
