@@ -11,22 +11,11 @@ import MapView, {Marker, Callout, Region} from 'react-native-maps';
 import useApiData from '../api/useApiData';
 import {RouteParams} from '../App';
 
-export default function MapComponent() {
+export default function MapComponent({coordinates}) {
   const {data, isLoaded} = useApiData(
     'https://data.education.gouv.fr/api/v2/catalog/datasets/fr-en-annuaire-education/records?where=code_postal%3D%2278000%22&limit=100&offset=0',
   );
   const [currentSchool, setCurrentSchool] = useState<any>();
-  // const mapRef = useRef<any>();
-
-  // const renderMarkers = ({item}: any) => {
-  //   return (
-  //     <Marker
-  //       coordinate={{
-  //         latitude: item.record.fields.latitude,
-  //         longitude: item.record.fields.longitude,
-  //       }}></Marker>
-  //   );
-  // };
 
   const onMarkerPressed = (marker: any) => {
     setCurrentSchool(marker);
@@ -40,17 +29,15 @@ export default function MapComponent() {
     );
   }
 
-  // console.log(prop)
   return (
     <View style={styles.container}>
       <MapView
-        // ref={mapRef}
         style={styles.map}
         showsUserLocation={true}
         onPress={() => setCurrentSchool(undefined)}
         initialRegion={{
-          latitude: 48.805,
-          longitude: 2.14,
+          latitude: 48.805 || coordinates.latitude,
+          longitude: 2.14 || coordinates.longitude,
           latitudeDelta: 0.1,
           longitudeDelta: 0.07,
         }}>
@@ -63,15 +50,9 @@ export default function MapComponent() {
               }}
               key={index}
               onPress={() => onMarkerPressed(marker)}>
-              {/* <Callout style={styles.callout}>
-                <Text>{marker.record.fields.nom_etablissement}</Text>
-                <Text>Statut: {marker.record.fields.statut_public_prive}</Text>
-                <Text>{marker.record.fields.adresse_1}</Text>
-              </Callout> */}
             </Marker>
           );
         })}
-        {/* <FlatList data={data} renderItem={renderMarkers} /> */}
       </MapView>
       {currentSchool && (
         <View style={styles.encart}>
